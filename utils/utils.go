@@ -16,6 +16,7 @@ func ExecCmd(command, args string) (out []byte, err error) {
 	}
 
 	cmd := exec.Command(command, argArray...)
+	fmt.Println(cmd.String())
 	buf, err := cmd.Output()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "The command failed to perform: %s (Command: %s, Arguments: %s)", err, command, args)
