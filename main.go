@@ -11,7 +11,7 @@ func main() {
 	hardware := v1.HardwareManagerData{
 		UserName:    "root",
 		Password:    "4ZGmklkhuHn@1",
-		Model:       "Inspur",
+		Model:       "inspur",
 		MIP:         "10.254.4.136",
 		ToolToolBin: v1.InspurToolBin,
 	}
