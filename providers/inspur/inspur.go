@@ -23,9 +23,8 @@ func hasError(info string) bool {
 
 func (inspur *Inspur) GetRaid() (raids []string, err error) {
 	raids = []string{}
-	cmd := fmt.Sprintf("%s -H %s  -U %s -P %s", v1.InspurToolBin, inspur.MIP, inspur.UserName, inspur.Password)
-	args := "getVirtualDrive"
-	out, err := utils.ExecCmd(cmd, args)
+	args := fmt.Sprintf("-H %s  -U %s -P %s getVirtualDrive ", inspur.MIP, inspur.UserName, inspur.Password)
+	out, err := utils.ExecCmd(inspur.ToolToolBin, args)
 	if err != nil {
 		return raids, err
 	}
