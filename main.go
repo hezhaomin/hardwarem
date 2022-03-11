@@ -10,7 +10,7 @@ import (
 func main() {
 	hardware := v1.HardwareManagerData{
 		UserName:    "root",
-		Password:    "4ZGkhuHn@1",
+		Password:    "4ZGmklkhuHn@1",
 		Model:       "Inspur",
 		MIP:         "10.254.4.136",
 		ToolToolBin: v1.InspurToolBin,
