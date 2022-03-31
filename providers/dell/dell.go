@@ -14,6 +14,7 @@ type Dell struct {
 }
 
 func NewDell(hm *v1.HardwareManagerData) (dell *Dell) {
+	hm.ToolToolBin = v1.DellToolBin
 	return &Dell{hm}
 }
 func hasError(info string) bool {

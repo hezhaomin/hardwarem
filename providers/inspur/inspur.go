@@ -15,6 +15,7 @@ type Inspur struct {
 }
 
 func NewInspur(hm *v1.HardwareManagerData) (inspur *Inspur) {
+	hm.ToolToolBin = v1.InspurToolBin
 	return &Inspur{hm}
 }
 func hasError(info string) bool {
