@@ -71,7 +71,7 @@ func (dell *Dell) InitRaid(raid string, speed string) (err error) {
 	return err
 
 }
-func (dell *Dell) DeleteRaid(raid string) (err error) {
+func (dell *Dell) DeleteRaid(controller string,raid string) (err error) {
 	args := fmt.Sprintf("-r %s  -u %s -p %s deletevd:%s", dell.MIP, dell.UserName, dell.Password, raid)
 	out, err := utils.ExecCmd(dell.ToolToolBin, args)
 	if err != nil {

@@ -10,7 +10,7 @@ import (
 
 type HardwareManager interface {
 	InitRaid(raid string, speed string) error
-	DeleteRaid(raid string) error
+	DeleteRaid(controller string, raid string) error
 	Reboot() error
 	CreateJob(job string) error
 	GetRaid() (raids []string, err error)
