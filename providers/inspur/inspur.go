@@ -19,7 +19,7 @@ func NewInspur(hm *v1.HardwareManagerData) (inspur *Inspur) {
 	return &Inspur{hm}
 }
 func hasError(info string) bool {
-	return strings.Contains(info, "Success:")
+	return strings.Contains(info, "Error:")
 }
 
 func (inspur *Inspur) GetRaid() (raids []string, err error) {
@@ -30,13 +30,13 @@ func (inspur *Inspur) GetRaid() (raids []string, err error) {
 		return raids, err
 	}
 	outStr := string(out)
-	if !hasError(outStr) {
+	if hasError(outStr) {
 		return raids, errors.New(outStr)
 	}
 	controller := 0
 	for _, raid := range strings.Split(outStr, "\n") {
 		if strings.Contains(raid, "ControllerID") {
-			controller, err = strconv.Atoi(strings.Split(raid, ":")[0])
+			controller, err = strconv.Atoi(strings.Split(raid, ":")[1])
 			if err != nil {
 				return raids, err
 			}
@@ -75,16 +75,15 @@ func (inspur *Inspur) InitRaid(raid string, speed string) (err error) {
 	return err
 
 }
-func (inspur *Inspur) DeleteRaid(raid string) (err error) {
+func (inspur *Inspur) DeleteRaid(controller string, raid string) (err error) {
 
-	raidInfo := strings.Split(raid, ":")
-	args := fmt.Sprintf("-H %s  -U %s -P %s setVirtualDrive -CID %s -VD %s -OP DEL", inspur.MIP, inspur.UserName, inspur.Password, raidInfo[0], raidInfo[1])
+	args := fmt.Sprintf("-H %s  -U %s -P %s setVirtualDrive -CID %s -VD %s -OP DEL", inspur.MIP, inspur.UserName, inspur.Password, controller, raid)
 	out, err := utils.ExecCmd(inspur.ToolToolBin, args)
 	if err != nil {
 		return err
 	}
 	outStr := string(out)
-	if !hasError(outStr) {
+	if hasError(outStr) {
 		return errors.New(outStr)
 	}
 
